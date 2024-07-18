@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'VAGRoundedBlackSSK';
+    src:
+      local('VAGRoundedBlackSSK Bold'),
+      local('VAGRoundedBlackSSK-Bold'),
+      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.woff2') format('woff2'),
+      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.woff') format('woff'),
+      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html {
+  }
+
+  body {
+    @apply w-screen h-dvh;
+    @apply overflow-x-hidden overflow-y-hidden;
+    /* background: rgb(114, 189, 233);
+    background: linear-gradient(
+      0deg,
+      rgba(114, 189, 233, 1) 0%,
+      rgba(114, 189, 233, 1) 40%,
+      rgba(255, 255, 255, 1) 100%
+    ); */
+    @apply bg-gradient-to-t from-seagull to-seagull-50;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  .primary-gradient {
+    background: rgb(114, 189, 233);
+    background: linear-gradient(
+      0deg,
+      rgba(114, 189, 233, 1) 0%,
+      rgba(114, 189, 233, 1) 40%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+
+  .secondary-gradient {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 40%,
+      rgba(114, 189, 233, 1) 100%
+    );
+  }
+}
