@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['VAGRoundedBlackSSK', ...defaultTheme.fontFamily.sans],
+        sans: ['Ubuntu', ...defaultTheme.fontFamily.sans],
         serif: [...defaultTheme.fontFamily.serif],
         mono: [...defaultTheme.fontFamily.mono]
       },
@@ -19,6 +19,76 @@ export default {
         xs: '480px'
       },
       colors: {
+        mosque: {
+          DEFAULT: '#027178',
+          50: '#AEF9FE',
+          100: '#9AF7FD',
+          200: '#72F4FD',
+          300: '#4AF1FC',
+          400: '#22EEFB',
+          500: '#04E2F0',
+          600: '#03BDC8',
+          700: '#0397A0',
+          800: '#027178',
+          900: '#013D41',
+          950: '#012325'
+        },
+        'gray-chateau': {
+          DEFAULT: '#9DA6AC',
+          50: '#FFFFFF',
+          100: '#F5F6F7',
+          200: '#DFE2E4',
+          300: '#C9CED1',
+          400: '#B3BABF',
+          500: '#9DA6AC',
+          600: '#7F8A92',
+          700: '#636E75',
+          800: '#4A5257',
+          900: '#303539',
+          950: '#232729'
+        },
+        iron: {
+          DEFAULT: '#DFE1E4',
+          50: '#FFFFFF',
+          100: '#F5F6F7',
+          200: '#DFE1E4',
+          300: '#C1C4CA',
+          400: '#A2A8B1',
+          500: '#848B97',
+          600: '#686F7B',
+          700: '#4E545C',
+          800: '#34383E',
+          900: '#1B1D20',
+          950: '#0E0F10'
+        },
+        'robin-s-egg-blue': {
+          DEFAULT: '#00BCD3',
+          50: '#B4F7FF',
+          100: '#A0F5FF',
+          200: '#77F0FF',
+          300: '#4EECFF',
+          400: '#26E7FF',
+          500: '#00E0FC',
+          600: '#00BCD3',
+          700: '#008A9B',
+          800: '#005863',
+          900: '#00262B',
+          950: '#000D0F'
+        },
+        'resolution-blue': {
+          DEFAULT: '#001689',
+          50: '#BCC7FF',
+          100: '#A8B6FF',
+          200: '#7F93FF',
+          300: '#5671FF',
+          400: '#2D4FFF',
+          500: '#042DFF',
+          600: '#0023DB',
+          700: '#001DB2',
+          800: '#001689',
+          900: '#000D51',
+          950: '#000835'
+        },
         seagull: {
           DEFAULT: '#72BDE9',
           50: '#FFFFFF',

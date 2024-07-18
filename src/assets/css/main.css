@@ -4,15 +4,82 @@
 
 @layer base {
   @font-face {
-    font-family: 'VAGRoundedBlackSSK';
+    font-family: 'Ubuntu';
     src:
-      local('VAGRoundedBlackSSK Bold'),
-      local('VAGRoundedBlackSSK-Bold'),
-      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.woff2') format('woff2'),
-      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.woff') format('woff'),
-      url('@/assets/fonts/VAGRoundedBlackSSK-Bold.ttf') format('truetype');
-    font-weight: 100;
+      url('@/assets/fonts/Ubuntu-Bold.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-Bold.woff') format('woff');
+    font-weight: bold;
     font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-Regular.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-Light.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-MediumItalic.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-Medium.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-Italic.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-BoldItalic.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Ubuntu';
+    src:
+      url('@/assets/fonts/Ubuntu-LightItalic.woff2') format('woff2'),
+      url('@/assets/fonts/Ubuntu-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
     font-display: swap;
   }
 
@@ -22,14 +89,7 @@
   body {
     @apply w-screen h-dvh;
     @apply overflow-x-hidden overflow-y-hidden;
-    /* background: rgb(114, 189, 233);
-    background: linear-gradient(
-      0deg,
-      rgba(114, 189, 233, 1) 0%,
-      rgba(114, 189, 233, 1) 40%,
-      rgba(255, 255, 255, 1) 100%
-    ); */
-    @apply bg-gradient-to-t from-seagull to-seagull-50;
+    @apply bg-iron font-sans;
   }
 
   @keyframes rotate {
@@ -46,23 +106,4 @@
 }
 
 @layer utilities {
-  .primary-gradient {
-    background: rgb(114, 189, 233);
-    background: linear-gradient(
-      0deg,
-      rgba(114, 189, 233, 1) 0%,
-      rgba(114, 189, 233, 1) 40%,
-      rgba(255, 255, 255, 1) 100%
-    );
-  }
-
-  .secondary-gradient {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 1) 40%,
-      rgba(114, 189, 233, 1) 100%
-    );
-  }
 }

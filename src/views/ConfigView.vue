@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/controls/Button.vue'
-import QLogo from '@/components/icons/QLogo.vue'
 import { useGameStore } from '@/stores/game'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 
 const gameStore = useGameStore()
@@ -25,46 +24,51 @@ onMounted(() => {})
 </script>
 
 <template>
-  <form
-    @submit.prevent="guardar"
-    class="h-dvh w-full overflow-x-hidden flex flex-col items-center justify-center gap-4 p-4"
-  >
-    <div class="flex flex-col gap-1 w-full max-w-xl">
-      <label class="text-xl text-endeavour-600">Tiempo de previsualización</label>
-      <input
-        class="rounded-full border border-endeavour py-4 px-10 text-xl"
-        type="number"
-        name="startGameCountDown"
-        :value="gameStore.startGameCountDown"
-      />
-    </div>
-    <div class="flex flex-col gap-1 w-full max-w-xl">
-      <label class="text-xl text-endeavour-600">Tiempo limite de juego</label>
-      <input
-        class="rounded-full border border-endeavour py-4 px-10 text-xl"
-        type="number"
-        name="timeLimit"
-        :value="gameStore.timeLimit"
-      />
-    </div>
-    <div class="flex flex-col gap-1 w-full max-w-xl">
-      <label class="text-xl text-endeavour-600">Limite de intentos</label>
-      <input
-        class="rounded-full border border-endeavour py-4 px-10 text-xl"
-        type="number"
-        name="attemptsLimit"
-        :value="gameStore.attemptsLimit"
-      />
-    </div>
-    <div class="flex flex-col gap-1 w-full max-w-xl">
-      <Button type="submit">Guardar</Button>
-    </div>
-    <div class="flex flex-col gap-1 w-full max-w-xl">
-      <RouterLink :to="{ name: 'home' }" custom v-slot="{ navigate }">
-        <Button type="button" @click="navigate">Volver a inicio</Button>
-      </RouterLink>
-    </div>
-  </form>
+  <div class="w-full h-full p-8 flex flex-col justify-center items-center">
+    <form @submit.prevent="guardar" class="w-full max-w-xl">
+      <fieldset
+        class="border border-resolution-blue rounded-2xl overflow-x-hidden flex flex-col items-center justify-center gap-4 p-4"
+      >
+        <legend class="text-3xl text-resolution-blue">Configuración</legend>
+
+        <div class="flex flex-col gap-1 w-full">
+          <label class="text-xl text-resolution-blue">Tiempo de previsualización</label>
+          <input
+            class="rounded-2xl border border-resolution-blue py-4 px-10 text-xl"
+            type="number"
+            name="startGameCountDown"
+            :value="gameStore.startGameCountDown"
+          />
+        </div>
+        <div class="flex flex-col gap-1 w-full">
+          <label class="text-xl text-resolution-blue">Tiempo limite de juego</label>
+          <input
+            class="rounded-2xl border border-resolution-blue py-4 px-10 text-xl"
+            type="number"
+            name="timeLimit"
+            :value="gameStore.timeLimit"
+          />
+        </div>
+        <div class="flex flex-col gap-1 w-full">
+          <label class="text-xl text-resolution-blue">Limite de intentos</label>
+          <input
+            class="rounded-2xl border border-resolution-blue py-4 px-10 text-xl"
+            type="number"
+            name="attemptsLimit"
+            :value="gameStore.attemptsLimit"
+          />
+        </div>
+        <div class="flex flex-col gap-1 w-full">
+          <Button type="submit">Guardar</Button>
+        </div>
+        <div class="flex flex-col gap-1 w-full">
+          <RouterLink :to="{ name: 'home' }" custom v-slot="{ navigate }">
+            <Button type="button" @click="navigate">Volver a inicio</Button>
+          </RouterLink>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <style scoped></style>

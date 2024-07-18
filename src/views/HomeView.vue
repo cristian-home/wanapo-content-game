@@ -1,217 +1,133 @@
 <script setup lang="ts">
+import greenArc from '@/assets/img/green-arc.webp'
 import Button from '@/components/controls/Button.vue'
 import QLogo from '@/components/icons/QLogo.vue'
-import router from '@/router'
+import TimerMain from '@/components/icons/TimerMain.vue'
 import { useGameStore } from '@/stores/game'
-import { onLongPress } from '@vueuse/core'
 import { useMotion } from '@vueuse/motion'
-import { onMounted, ref, type Ref } from 'vue'
-import { RouterLink, onBeforeRouteLeave } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { RouterLink, onBeforeRouteLeave, useRouter } from 'vue-router'
 
-const qLogoRef = ref<HTMLDivElement | null>(null)
-const pageContent = ref<HTMLDivElement | null>(null)
-const winnyLogo = ref<HTMLImageElement | null>(null)
-const start = ref<HTMLDivElement | null>(null)
-const buttonStart = ref<HTMLButtonElement | null>(null)
-const footerParagraphLeft = ref<HTMLParagraphElement | null>(null)
-const footerParagraphRight = ref<HTMLParagraphElement | null>(null)
-const buttonStartRef = ref<HTMLButtonElement | null>(null)
+const gameStore = useGameStore()
+const router = useRouter()
 
-const floatingElements = [winnyLogo, start, buttonStart]
-const fixedElements = [footerParagraphLeft, footerParagraphRight]
-const absoluteElements = [qLogoRef]
-
-const animateEnter = (ref: Ref<HTMLElement | null>, index: number = 0) => {
-  useMotion(ref, {
-    initial: {
-      y: 100,
-      opacity: 0
-    },
-    enter: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 350,
-        damping: 20,
-        delay: index * 50
-      }
-    }
-  })
-}
-
-const animateFloating = (ref: Ref<HTMLElement | null>, index: number = 0) => {
-  const { variant } = useMotion(ref, {
-    initial: {
-      y: 100,
-      opacity: 0
-    },
-    enter: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 350,
-        damping: 20,
-        delay: index * 150,
-        onComplete: () => {
-          variant.value = 'levitate'
-        }
-      }
-    },
-    levitate: {
-      y: 15,
-      transition: {
-        duration: 2000,
-        repeat: Infinity,
-        ease: 'easeInOut',
-        repeatType: 'mirror'
-      }
-    }
-  })
-}
+const circleMosque = ref<HTMLDivElement | null>(null)
+const circleIron = ref<HTMLDivElement | null>(null)
 
 const animateLeave = async () => {
-  await Promise.all([
-    ...floatingElements.reverse().map((ref, index) => {
-      return new Promise((resolve) => {
-        useMotion(ref, {
-          initial: {
-            scale: 1,
-            opacity: 1
-          },
-          enter: {
-            scale: 0,
-            opacity: 0,
-            transition: {
-              // type: 'spring',
-              // stiffness: 350,
-              delay: index * 150,
-              onComplete: () => {
-                resolve(true)
+  await new Promise((resolve) => {
+    useMotion(circleMosque, {
+      initial: {
+        scale: 0,
+        opacity: 1
+      },
+      enter: {
+        scale: 600,
+        opacity: 1,
+        transition: {
+          duration: 500,
+          onComplete: () => {
+            useMotion(circleIron, {
+              initial: {
+                scale: 0,
+                opacity: 1
+              },
+              enter: {
+                scale: 600,
+                opacity: 1,
+                transition: {
+                  duration: 500,
+                  onComplete: () => {
+                    resolve(true)
+                  }
+                }
               }
-            }
+            })
           }
-        })
-      })
-    }),
-
-    ...fixedElements.reverse().map((ref, index) => {
-      return new Promise((resolve) => {
-        useMotion(ref, {
-          initial: {
-            y: 0,
-            opacity: 1
-          },
-          enter: {
-            y: 100,
-            opacity: 0,
-            transition: {
-              // type: 'spring',
-              // stiffness: 350,
-              // damping: 20,
-              delay: index * 150,
-              onComplete: () => {
-                resolve(true)
-              }
-            }
-          }
-        })
-      })
+        }
+      }
     })
-  ])
+  })
 }
 
 onBeforeRouteLeave(async () => {
   await animateLeave()
 })
 
-// onLongPress(
-//   buttonStartRef,
-//   () => {
-//     router.push({ name: 'config' })
-//   },
-//   {
-//     // delay: 1500,
-//     modifiers: {
-//       prevent: true
-//     }
-//   }
-// )
-
-onMounted(() => {
-  absoluteElements.forEach((ref, index) => {
-    useMotion(ref, {
-      initial: {
-        opacity: 0,
-        scale: 0
-      },
-      enter: {
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          stiffness: 350,
-          damping: 20,
-          delay: index * 100
-        }
-      }
-    })
-  })
-
-  floatingElements.forEach((ref, index) => {
-    animateFloating(ref, index)
-  })
-
-  fixedElements.forEach((ref, index) => {
-    animateEnter(ref, index)
-  })
-})
+onMounted(() => {})
 </script>
 
 <template>
-  <div class="h-dvh w-full overflow-x-hidden">
-    <QLogo class="absolute top-2 left-2 w-16 h-16 fill-endeavour" ref="qLogoRef" />
-    <div
-      ref="pageContent"
-      class="w-full h-dvh overflow-x-hidden overflow-y-hidden grid grid-cols-1 grid-rows-[auto_1fr_auto] justify-items-center align-items-center gap-4 p-4"
-    >
-      <div class="col-start-1 col-end-1 row-start-1 row-end-1">
-        <img src="@/assets/img/winny-logo_600x600.webp" class="max-h-28" ref="winnyLogo" />
+  <div class="h-dvh w-full overflow-x-hidden grid grid-cols-1 grid-rows-[1fr_1fr_10rem]">
+    <QLogo
+      @click="router.push({ name: 'config' })"
+      class="absolute top-2 left-2 w-16 max-w-[15%] h-16 fill-resolution-blue"
+      ref="qLogoRef"
+    />
+    <div class="w-full flex flex-col justify-center items-center">
+      <img src="@/assets/img/content-logo.svg" class="max-h-32 max-w-[50%]" ref="winnyLogo" />
+    </div>
+    <div class="w-full flex flex-col justify-start items-center relative">
+      <img class="w-full -mt-32" :src="greenArc" alt="" srcset="" />
+      <div class="w-full grow bg-mosque">
+        <img
+          class="absolute bottom-0 left-0 max-w-[70%] max-h-[120%] self-end"
+          src="@/assets/img/nurse.webp"
+          alt=""
+        />
+        <div
+          class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
+          ref="circleMosque"
+        ></div>
+        <div
+          class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
+          ref="circleIron"
+        ></div>
+        <div class="w-full h-full min-h-[150px] flex flex-row justify-end items-start">
+          <div class="w-[60%]">
+            <p class="font-bold text-3xl text-center text-white italic">
+              <span class="text-2xl">Participa en el </span>
+              <br />
+              <span>desafío mental</span>
+              <br />
+              <span>Content</span>
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="w-full flex flex-col justify-center items-center">
+      <RouterLink to="/game" custom v-slot="{ navigate }">
+        <Button class="shadow-xl z-20 -mt-8" type="button" @click="navigate" ref="buttonStartRef">
+          <span>Inicio</span>
+        </Button>
+      </RouterLink>
+
       <div
-        ref="start"
-        :leave="{ opacity: 0 }"
-        class="self-start col-start-1 col-end-1 row-start-2 row-end-2 flex flex-col justify-center items-center gap-6"
+        class="text-resolution-blue w-full h-full flex flex-row justify-center items-center gap-10 px-5"
       >
-        <div class="row-start-1 row-end-1">
-          <img src="@/assets/img/start_600x600.webp" class="max-h-80" />
+        <div class="w-1/2 italic font-medium text-xl">
+          <div class="flex flex-row gap-2">
+            <TimerMain class="w-16" :seconds="gameStore.startGameCountDown" />
+            <p class="leading-5">
+              <span>En </span>
+              <span class="font-bold text-4xl leading-5 text-robin-s-egg-blue">
+                {{ gameStore.startGameCountDown }}
+              </span>
+              <span class="text-xl leading-5 text-robin-s-egg-blue"> segundos </span>
+              <br />
+              <span>deberas memorizar las fichas</span>
+            </p>
+          </div>
         </div>
-        <div class="col-start-1 col-end-1 row-start-2 row-end-2" ref="buttonStart">
-          <RouterLink to="/game" custom v-slot="{ navigate }">
-            <Button type="button" @click="navigate" ref="buttonStartRef">Iniciar</Button>
-          </RouterLink>
-        </div>
-      </div>
-      <div
-        class="w-full text-endeavour col-start-1 col-end-1 row-start-3 row-end-3 flex flex-row justify-center gap-10"
-      >
-        <div class="max-w-64 w-1/2">
-          <p class="text-lg text-center" ref="footerParagraphLeft">
-            En
-            <span class="text-2xl text-mauvelous"
-              >{{ useGameStore().startGameCountDown }} segundos</span
-            >
-            deberas memorizar las fichas
-          </p>
-        </div>
-        <div class="max-w-64 w-1/2">
-          <p class="text-lg text-center" ref="footerParagraphRight">
-            Son
-            <span class="text-2xl text-mauvelous"
-              >{{ useGameStore().attemptsLimit }} movimientos</span
-            >
-            para armar la mayor cantidad de parejas
+        <div class="w-1/2 font-medium text-xl">
+          <p class="leading-5">
+            <span> Son </span>
+            <span class="font-bold text-6xl leading-5 text-robin-s-egg-blue">
+              {{ gameStore.attemptsLimit }}
+            </span>
+            <span> movimientos </span>
+            <span> para armar la mayor cantidad de parejas </span>
           </p>
         </div>
       </div>

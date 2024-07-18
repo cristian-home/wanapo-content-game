@@ -1,14 +1,14 @@
-<script setup lang="ts">
-import IonHeart from '~icons/ion/heart'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <button
-    class="transition h-12 text-xl duration-300 hover:shadow-xl hover:scale-105 hover:shadow-seagull active:scale-95 shadow-md outline outline-4 outline-white bg-gradient-to-t from-seagull from-5% via-ebb-500 via-50% to-ebb-500 to-90% text-endeavour rounded-full px-4 py-2 flex flex-row gap-2 justify-center items-center"
+    class="text-4xl font-sans font-bold text-iron italic transition h-16 duration-300 hover:shadow-xl hover:scale-105 active:scale-95 px-12 py-0 flex flex-row gap-2 justify-center items-center bg-robin-s-egg-blue rounded-se-[23px_30px] rounded-es-[23px_30px]"
   >
-    <IonHeart class="w-4 h-4 -rotate-45 text-light-orchid" />
-    <slot />
-    <IonHeart class="w-4 h-4 rotate-45 text-light-orchid" />
+    <div
+      class="px-2 bg-iron bg-gradient-to-r from-iron-300 via-iron-50 to-iron-300 bg-clip-text text-4xl text-transparent font-bold font-ubuntu tracking-wider"
+    >
+      <slot />
+    </div>
   </button>
 </template>
 
