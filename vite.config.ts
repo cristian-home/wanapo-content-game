@@ -8,7 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/wannapo-game/',
+  base: '/wannapo-content-game/',
   plugins: [
     Icons({ compiler: 'vue3' }),
     vue(),
@@ -20,10 +20,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,json,mp3}']
       },
       manifest: {
-        name: 'Concéntrese - Winny',
+        name: 'Concéntrese - Content',
         short_name: 'Concéntrese',
-        description: 'Pon a prueba tu memoria y diviertete con el juego de Winny',
-        theme_color: '#00509D',
+        description: 'Pon a prueba tu memoria y diviertete con el juego de Content',
+        theme_color: '#027177',
         icons: [
           {
             src: 'pwa-64x64.png',
