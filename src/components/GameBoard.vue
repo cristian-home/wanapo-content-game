@@ -24,10 +24,10 @@ onMounted(() => {})
         :key="tile.id"
         :tile="tile"
         @click="gameStore.revealTile(tile.id)"
-        :initial="{ y: 100, opacity: 0 }"
+        :initial="{ scale: 0, opacity: 0 }"
         :enter="{
-          y: 0,
           opacity: 1,
+          scale: 1,
           transition: { type: 'spring', stiffness: 350, damping: 20, delay: index * 100 }
         }"
       />

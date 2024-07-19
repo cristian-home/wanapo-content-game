@@ -62,10 +62,9 @@ onMounted(() => {})
     <QLogo
       @click="router.push({ name: 'config' })"
       class="absolute top-2 left-2 w-16 max-w-[15%] h-16 fill-resolution-blue"
-      ref="qLogoRef"
     />
     <div class="w-full flex flex-col justify-center items-center">
-      <img src="@/assets/img/content-logo.svg" class="max-h-32 max-w-[50%]" ref="winnyLogo" />
+      <img src="@/assets/img/content-logo.svg" class="max-h-32 max-w-[50%]" />
     </div>
     <div class="w-full flex flex-col justify-start items-center relative">
       <img class="w-full -mt-32" :src="greenArc" alt="" srcset="" />
@@ -75,14 +74,6 @@ onMounted(() => {})
           src="@/assets/img/nurse.webp"
           alt=""
         />
-        <div
-          class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
-          ref="circleMosque"
-        ></div>
-        <div
-          class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
-          ref="circleIron"
-        ></div>
         <div class="w-full h-full min-h-[150px] flex flex-row justify-end items-start">
           <div class="w-[60%]">
             <p class="font-bold text-3xl text-center text-white italic">
@@ -98,7 +89,7 @@ onMounted(() => {})
     </div>
     <div class="w-full flex flex-col justify-center items-center">
       <RouterLink to="/game" custom v-slot="{ navigate }">
-        <Button class="shadow-xl z-20 -mt-8" type="button" @click="navigate" ref="buttonStartRef">
+        <Button class="shadow-xl z-20 -mt-8" type="button" @click="navigate">
           <span>Inicio</span>
         </Button>
       </RouterLink>
@@ -132,6 +123,14 @@ onMounted(() => {})
         </div>
       </div>
     </div>
+    <div
+      class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
+      ref="circleMosque"
+    ></div>
+    <div
+      class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
+      ref="circleIron"
+    ></div>
   </div>
 </template>
 

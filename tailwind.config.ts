@@ -18,6 +18,9 @@ export default {
       screens: {
         xs: '480px'
       },
+      boxShadow: {
+        'hard-sm': '8px 8px 0px 0px rgb(0 0 0 / 0.5)'
+      },
       colors: {
         mosque: {
           DEFAULT: '#027178',

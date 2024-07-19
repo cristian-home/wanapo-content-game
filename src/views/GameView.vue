@@ -2,30 +2,28 @@
 import PairCounter from '@/components/PairCounter.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import QLogo from '@/components/icons/QLogo.vue'
-import { useMotion } from '@vueuse/motion'
 import { computed, onMounted, ref, watch } from 'vue'
 import Button from '@/components/controls/Button.vue'
 import Badge from '@/components/controls/Badge.vue'
-import Timer from '@/components/icons/Timer.vue'
+import TimerGame from '@/components/icons/TimerGame.vue'
 import { useIntervalFn } from '@vueuse/core'
 import { invoke, until, useCounter } from '@vueuse/core'
 import ModalDialog from '@/components/ModalDialog.vue'
 import { onBeforeRouteLeave, useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/game'
 import CountDown from '@/components/CountDown.vue'
+import QR from '@/components/icons/QR.vue'
+import { useMotion } from '@vueuse/motion'
 
 const gameStore = useGameStore()
 const router = useRouter()
 
-const headerRef = ref<HTMLElement | null>(null)
-const gameBoardRef = ref<HTMLElement | null>(null)
-const footerRef = ref<HTMLElement | null>(null)
-
-const animatedElements = [headerRef, gameBoardRef, footerRef]
-
 const gameOverModal = ref(false)
 const modalTitle = ref('')
 const modalText = ref('')
+
+const circleMosque = ref<HTMLDivElement | null>(null)
+const circleIron = ref<HTMLDivElement | null>(null)
 
 const startGameCountDown = ref(gameStore.startGameCountDown.valueOf())
 
@@ -93,102 +91,103 @@ watch(
   }
 )
 
-onBeforeRouteLeave(async () => {
-  if (attempts.value < gameStore.getAttemptsLimit && timeLeft.value > 0) return false
-
-  await await Promise.all([
-    ...animatedElements.map((ref) => {
-      return new Promise((resolve) => {
-        useMotion(ref, {
-          initial: {
-            y: 0,
-            opacity: 1
-          },
-          enter: {
-            y: 100,
-            opacity: 0,
-            transition: {
-              type: 'spring',
-              stiffness: 350,
-              damping: 20,
-              onComplete: () => {
-                resolve(true)
-              }
-            }
-          }
-        })
-      })
-    })
-  ])
-})
-
-onMounted(() => {
-  animatedElements.forEach((ref, index) => {
-    useMotion(ref, {
+const animateLeave = async () => {
+  await new Promise((resolve) => {
+    useMotion(circleMosque, {
       initial: {
-        y: 100,
-        opacity: 0
+        scale: 0,
+        opacity: 1
       },
       enter: {
-        y: 0,
+        scale: 600,
         opacity: 1,
         transition: {
-          type: 'spring',
-          stiffness: 350,
-          damping: 20,
-          delay: index * 150
+          duration: 500,
+          onComplete: () => {
+            useMotion(circleIron, {
+              initial: {
+                scale: 0,
+                opacity: 1
+              },
+              enter: {
+                scale: 600,
+                opacity: 1,
+                transition: {
+                  duration: 500,
+                  onComplete: () => {
+                    resolve(true)
+                  }
+                }
+              }
+            })
+          }
         }
       }
     })
   })
+}
+
+onBeforeRouteLeave(async () => {
+  if (attempts.value < gameStore.getAttemptsLimit && timeLeft.value > 0) return false
+
+  await animateLeave()
+})
+
+onMounted(() => {
+  if (gameStore.gameStarted) resume()
 })
 </script>
 
 <template>
   <div
-    class="h-dvh w-full overflow-x-hidden overflow-y-hidden grid grid-cols-1 grid-rows-[auto_1fr_auto] justify-items-center place-items-center gap-2"
-    ref="headerRef"
+    class="h-dvh w-full overflow-x-hidden overflow-y-hidden grid grid-cols-1 grid-rows-[auto_1fr_6rem] justify-items-center place-items-center gap-2"
   >
-    <div class="h-20 w-full flex flex-row justify-between gap-8 p-0">
-      <div class="w-1/4 flex flex-row justify-start items-center">
-        <QLogo class="fill-endeavour max-h-full max-w-full w-20 h-20" />
-      </div>
-      <div class="w-2/4 flex flex-row justify-center items-center grow">
+    <div class="px-4 w-full flex flex-row justify-between items-center gap-4">
+      <div class="h-20 shrink-0 flex flex-row justify-start items-start gap-4">
+        <QLogo class="fill-resolution-blue max-h-full max-w-full w-16 h-16" />
         <PairCounter
-          class="scale-125 origin-top max-h-full grow"
+          class="h-full self-start"
           :pair-count="gameStore.getPairsFound"
           :max-pairs="gameStore.getMaxPosiblePairs"
         />
       </div>
-      <div class="w-1/4 flex flex-row justify-end items-center">
-        <img src="@/assets/img/winny-logo_600x600.webp" class="max-h-full max-w-full" />
+      <div class="grow h-20 flex flex-row justify-end items-center pt-2">
+        <img src="@/assets/img/content-logo.svg" class="h-full" />
       </div>
     </div>
-    <div
-      class="w-full h-[0] min-h-full flex flex-col justify-center items-center"
-      ref="gameBoardRef"
-    >
+    <div class="w-full h-[0] min-h-full flex flex-col justify-center items-center">
       <GameBoard />
     </div>
-    <div class="h-20 w-full flex flex-row justify-between gap-2 p-0" ref="footerRef">
-      <div class="w-2/3 flex flex-row justify-start items-center">
-        <Badge class="flex-row py-1 translate-x-[3rem]">
+    <div class="w-full flex flex-row justify-between gap-2 p-2">
+      <div class="pl-6">
+        <Badge class="py-0">
           <template #left-icon>
-            <Timer class="w-8 h-8 scale-[3] origin-right" />
+            <TimerGame class="w-16 h-16 origin-right scale-150" :seconds="timeLeft" />
           </template>
           <div class="flex-col">
-            <div class="text-sm">{{ timeLeft }} segundos</div>
-            <div class="text-sm">
-              Intentos {{ gameStore.attempts }} / {{ gameStore.getAttemptsLimit }}
-            </div>
+            <p class="leading-5 text-2xl whitespace-nowrap">
+              {{ timeLeft }}
+              <span class="text-lg leading-5"> segundos</span>
+            </p>
+            <p class="leading-5 text-2xl whitespace-nowrap">
+              {{ gameStore.attempts }}/{{ gameStore.getAttemptsLimit }}
+              <span class="text-lg leading-5"> intentos</span>
+            </p>
           </div>
         </Badge>
       </div>
-      <div class="w-1/3 flex flex-row justify-end items-center self-end">
-        <img src="@/assets/img/bottom-bear_300x300.webp" class="max-h-full max-w-full w-36" />
-      </div>
+
+      <QR class="w-20 h-20" />
     </div>
   </div>
+  <div
+    class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
+    ref="circleMosque"
+  ></div>
+  <div
+    class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
+    ref="circleIron"
+  ></div>
   <CountDown v-model:seconds="startGameCountDown" v-if="!gameStore.gameStarted" />
   <ModalDialog
     :is-open="gameOverModal"
