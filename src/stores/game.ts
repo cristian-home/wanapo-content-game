@@ -159,5 +159,9 @@ export const useGameStore = defineStore(
       revealTile
     }
   },
-  { persist: true }
+  {
+    persist: {
+      key: 'wanapo-content-game'
+    }
+  }
 )
