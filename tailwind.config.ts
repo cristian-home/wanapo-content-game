@@ -64,6 +64,20 @@ export default {
           900: '#1B1D20',
           950: '#0E0F10'
         },
+        geyser: {
+          DEFAULT: '#D6DDE3',
+          50: '#FFFFFF',
+          100: '#FFFFFF',
+          200: '#EEF1F4',
+          300: '#D6DDE3',
+          400: '#B5C1CC',
+          500: '#93A6B5',
+          600: '#728A9F',
+          700: '#586E81',
+          800: '#41515F',
+          900: '#2A353E',
+          950: '#1F272D'
+        },
         'robin-s-egg-blue': {
           DEFAULT: '#00BCD3',
           50: '#B4F7FF',

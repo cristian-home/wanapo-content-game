@@ -3,62 +3,35 @@ import greenArc from '@/assets/img/green-arc.webp'
 import Button from '@/components/controls/Button.vue'
 import QLogo from '@/components/icons/QLogo.vue'
 import TimerMain from '@/components/icons/TimerMain.vue'
+import { useAppStore } from '@/stores/app'
 import { useGameStore } from '@/stores/game'
-import { useMotion } from '@vueuse/motion'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { RouterLink, onBeforeRouteLeave, useRouter } from 'vue-router'
 
+const store = useAppStore()
 const gameStore = useGameStore()
 const router = useRouter()
 
-const circleMosque = ref<HTMLDivElement | null>(null)
-const circleIron = ref<HTMLDivElement | null>(null)
-
-const animateLeave = async () => {
-  await new Promise((resolve) => {
-    useMotion(circleMosque, {
-      initial: {
-        scale: 0,
-        opacity: 1
-      },
-      enter: {
-        scale: 600,
-        opacity: 1,
-        transition: {
-          duration: 500,
-          onComplete: () => {
-            useMotion(circleIron, {
-              initial: {
-                scale: 0,
-                opacity: 1
-              },
-              enter: {
-                scale: 600,
-                opacity: 1,
-                transition: {
-                  duration: 500,
-                  onComplete: () => {
-                    resolve(true)
-                  }
-                }
-              }
-            })
-          }
-        }
-      }
-    })
-  })
-}
-
 onBeforeRouteLeave(async () => {
-  await animateLeave()
+  await store.rippleTransition()
 })
 
 onMounted(() => {})
 </script>
 
 <template>
-  <div class="h-dvh w-full overflow-x-hidden grid grid-cols-1 grid-rows-[1fr_1fr_10rem]">
+  <div
+    v-motion
+    :initial="{ opacity: 0 }"
+    :enter="{
+      opacity: 1,
+      transition: {
+        delay: 100,
+        duration: 500
+      }
+    }"
+    class="h-dvh w-full overflow-x-hidden grid grid-cols-1 grid-rows-[1fr_1fr_10rem]"
+  >
     <QLogo
       @click="router.push({ name: 'config' })"
       class="absolute top-2 left-2 w-16 max-w-[15%] h-16 fill-resolution-blue"
@@ -97,12 +70,12 @@ onMounted(() => {})
       <div
         class="text-resolution-blue w-full h-full flex flex-row justify-center items-center gap-10 px-5"
       >
-        <div class="w-1/2 italic font-medium text-xl">
+        <div class="w-1/2 max-w-sm italic font-medium text-lg sm:text-xl">
           <div class="flex flex-row gap-2">
-            <TimerMain class="w-16" :seconds="gameStore.startGameCountDown" />
+            <TimerMain class="w-16 shrink-0" :seconds="gameStore.startGameCountDown" />
             <p class="leading-5">
               <span>En </span>
-              <span class="font-bold text-4xl leading-5 text-robin-s-egg-blue">
+              <span class="font-bold text-3xl sm:text-4xl leading-5 text-robin-s-egg-blue">
                 {{ gameStore.startGameCountDown }}
               </span>
               <span class="text-xl leading-5 text-robin-s-egg-blue"> segundos </span>
@@ -111,10 +84,10 @@ onMounted(() => {})
             </p>
           </div>
         </div>
-        <div class="w-1/2 font-medium text-xl">
+        <div class="w-1/2 max-w-sm font-medium text-lg sm:text-xl">
           <p class="leading-5">
             <span> Son </span>
-            <span class="font-bold text-6xl leading-5 text-robin-s-egg-blue">
+            <span class="font-bold text-4xl sm:text-6xl leading-5 text-robin-s-egg-blue">
               {{ gameStore.attemptsLimit }}
             </span>
             <span> movimientos </span>
@@ -123,14 +96,6 @@ onMounted(() => {})
         </div>
       </div>
     </div>
-    <div
-      class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
-      ref="circleMosque"
-    ></div>
-    <div
-      class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
-      ref="circleIron"
-    ></div>
   </div>
 </template>
 

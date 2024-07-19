@@ -1,29 +1,26 @@
 <script setup lang="ts">
-import PairCounter from '@/components/PairCounter.vue'
+import Badge from '@/components/controls/Badge.vue'
+import Button from '@/components/controls/Button.vue'
+import CountDown from '@/components/CountDown.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import QLogo from '@/components/icons/QLogo.vue'
-import { computed, onMounted, ref, watch } from 'vue'
-import Button from '@/components/controls/Button.vue'
-import Badge from '@/components/controls/Badge.vue'
-import TimerGame from '@/components/icons/TimerGame.vue'
-import { useIntervalFn } from '@vueuse/core'
-import { invoke, until, useCounter } from '@vueuse/core'
-import ModalDialog from '@/components/ModalDialog.vue'
-import { onBeforeRouteLeave, useRouter } from 'vue-router'
-import { useGameStore } from '@/stores/game'
-import CountDown from '@/components/CountDown.vue'
 import QR from '@/components/icons/QR.vue'
-import { useMotion } from '@vueuse/motion'
+import TimerGame from '@/components/icons/TimerGame.vue'
+import ModalDialog from '@/components/ModalDialog.vue'
+import PairCounter from '@/components/PairCounter.vue'
+import { useAppStore } from '@/stores/app'
+import { useGameStore } from '@/stores/game'
+import { invoke, until, useCounter, useIntervalFn } from '@vueuse/core'
+import { computed, onMounted, ref, watch } from 'vue'
+import { onBeforeRouteLeave, useRouter } from 'vue-router'
 
 const gameStore = useGameStore()
+const store = useAppStore()
 const router = useRouter()
 
 const gameOverModal = ref(false)
 const modalTitle = ref('')
 const modalText = ref('')
-
-const circleMosque = ref<HTMLDivElement | null>(null)
-const circleIron = ref<HTMLDivElement | null>(null)
 
 const startGameCountDown = ref(gameStore.startGameCountDown.valueOf())
 
@@ -91,46 +88,10 @@ watch(
   }
 )
 
-const animateLeave = async () => {
-  await new Promise((resolve) => {
-    useMotion(circleMosque, {
-      initial: {
-        scale: 0,
-        opacity: 1
-      },
-      enter: {
-        scale: 600,
-        opacity: 1,
-        transition: {
-          duration: 500,
-          onComplete: () => {
-            useMotion(circleIron, {
-              initial: {
-                scale: 0,
-                opacity: 1
-              },
-              enter: {
-                scale: 600,
-                opacity: 1,
-                transition: {
-                  duration: 500,
-                  onComplete: () => {
-                    resolve(true)
-                  }
-                }
-              }
-            })
-          }
-        }
-      }
-    })
-  })
-}
-
 onBeforeRouteLeave(async () => {
   if (attempts.value < gameStore.getAttemptsLimit && timeLeft.value > 0) return false
 
-  await animateLeave()
+  await store.rippleTransition()
 })
 
 onMounted(() => {
@@ -180,14 +141,6 @@ onMounted(() => {
       <QR class="w-20 h-20" />
     </div>
   </div>
-  <div
-    class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-mosque rounded-full"
-    ref="circleMosque"
-  ></div>
-  <div
-    class="scale-0 z-30 fixed bottom-0 left-0 w-1 h-1 bg-iron rounded-full"
-    ref="circleIron"
-  ></div>
   <CountDown v-model:seconds="startGameCountDown" v-if="!gameStore.gameStarted" />
   <ModalDialog
     :is-open="gameOverModal"
