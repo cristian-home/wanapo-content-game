@@ -8,7 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/wannapo-content-game/',
+  base: '/wanapo-content-game/',
   plugins: [
     Icons({ compiler: 'vue3' }),
     vue(),
