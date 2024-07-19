@@ -13,10 +13,10 @@ interface GameStats {
 export const useGameStore = defineStore(
   'game',
   () => {
-    const startGameCountDown = ref(10)
+    const startGameCountDown = ref(5)
     const gameStarted = ref(false)
     const timeLimit = ref(60)
-    const attemptsLimit = ref(6)
+    const attemptsLimit = ref(4)
 
     const currentGameStats = ref<GameStats>({
       date: new Date(),

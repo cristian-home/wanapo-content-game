@@ -14,7 +14,7 @@ export const useAppStore = defineStore('app', () => {
           opacity: 1
         },
         enter: {
-          scale: Math.max(window.innerWidth, window.innerHeight) / 2 + 120,
+          scale: Math.max(window.innerWidth, window.innerHeight) / 2 + 150,
           opacity: 1,
           transition: {
             duration: 500,
@@ -25,7 +25,7 @@ export const useAppStore = defineStore('app', () => {
                   opacity: 1
                 },
                 enter: {
-                  scale: Math.max(window.innerWidth, window.innerHeight) / 2 + 120,
+                  scale: Math.max(window.innerWidth, window.innerHeight) / 2 + 150,
                   opacity: 1,
                   transition: {
                     duration: 500,
