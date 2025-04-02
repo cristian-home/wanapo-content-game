@@ -1,30 +1,31 @@
-import a1 from '@/assets/img/tiles/a1.webp'
-import a2 from '@/assets/img/tiles/a2.webp'
-import a3 from '@/assets/img/tiles/a3.webp'
-import b1 from '@/assets/img/tiles/b1.webp'
-import b2 from '@/assets/img/tiles/b2.webp'
-import b3 from '@/assets/img/tiles/b3.webp'
-import c1 from '@/assets/img/tiles/c1.webp'
-import c2 from '@/assets/img/tiles/c2.webp'
-import c3 from '@/assets/img/tiles/c3.webp'
-import d1 from '@/assets/img/tiles/d1.webp'
-import d2 from '@/assets/img/tiles/d2.webp'
-import d3 from '@/assets/img/tiles/d3.webp'
-import e1 from '@/assets/img/tiles/e1.webp'
-import e2 from '@/assets/img/tiles/e2.webp'
-import e3 from '@/assets/img/tiles/e3.webp'
-import f1 from '@/assets/img/tiles/f1.webp'
-import f2 from '@/assets/img/tiles/f2.webp'
-import f3 from '@/assets/img/tiles/f3.webp'
-import g1 from '@/assets/img/tiles/g1.webp'
-import g2 from '@/assets/img/tiles/g2.webp'
-import g3 from '@/assets/img/tiles/g3.webp'
-import h1 from '@/assets/img/tiles/h1.webp'
-import h2 from '@/assets/img/tiles/h2.webp'
-import h3 from '@/assets/img/tiles/h3.webp'
-import i1 from '@/assets/img/tiles/i1.webp'
-import i2 from '@/assets/img/tiles/i2.webp'
-import i3 from '@/assets/img/tiles/i3.webp'
+import image1 from '@/assets/img/tiles/Tile-10.webp'
+import image2 from '@/assets/img/tiles/Tile-14.webp'
+import image3 from '@/assets/img/tiles/Tile-18.webp'
+import image4 from '@/assets/img/tiles/Tile-21.webp'
+import image5 from '@/assets/img/tiles/Tile-25.webp'
+import image6 from '@/assets/img/tiles/Tile-2.webp'
+import image7 from '@/assets/img/tiles/Tile-6.webp'
+import image8 from '@/assets/img/tiles/Tile-11.webp'
+import image9 from '@/assets/img/tiles/Tile-15.webp'
+import image10 from '@/assets/img/tiles/Tile-19.webp'
+import image11 from '@/assets/img/tiles/Tile-22.webp'
+import image12 from '@/assets/img/tiles/Tile-26.webp'
+import image13 from '@/assets/img/tiles/Tile-3.webp'
+import image14 from '@/assets/img/tiles/Tile-7.webp'
+import image15 from '@/assets/img/tiles/Tile-12.webp'
+import image16 from '@/assets/img/tiles/Tile-16.webp'
+import image17 from '@/assets/img/tiles/Tile-1.webp'
+import image18 from '@/assets/img/tiles/Tile-23.webp'
+import image19 from '@/assets/img/tiles/Tile-27.webp'
+import image20 from '@/assets/img/tiles/Tile-4.webp'
+import image21 from '@/assets/img/tiles/Tile-8.webp'
+import image22 from '@/assets/img/tiles/Tile-13.webp'
+import image23 from '@/assets/img/tiles/Tile-17.webp'
+import image24 from '@/assets/img/tiles/Tile-20.webp'
+import image25 from '@/assets/img/tiles/Tile-24.webp'
+import image26 from '@/assets/img/tiles/Tile-28.webp'
+import image27 from '@/assets/img/tiles/Tile-5.webp'
+import image28 from '@/assets/img/tiles/Tile-9.webp'
 
 export interface RawTile {
   matchValue: number
@@ -38,58 +39,60 @@ export interface Tile extends RawTile {
 }
 
 export const tilesData: RawTile[] = [
-  { matchValue: 1, image: a1, isRevealed: false, isMatched: false },
-  { matchValue: 1, image: a1, isRevealed: false, isMatched: false },
-  { matchValue: 2, image: a2, isRevealed: false, isMatched: false },
-  { matchValue: 2, image: a2, isRevealed: false, isMatched: false },
-  { matchValue: 3, image: a3, isRevealed: false, isMatched: false },
-  { matchValue: 3, image: a3, isRevealed: false, isMatched: false },
-  { matchValue: 4, image: b1, isRevealed: false, isMatched: false },
-  { matchValue: 4, image: b1, isRevealed: false, isMatched: false },
-  { matchValue: 5, image: b2, isRevealed: false, isMatched: false },
-  { matchValue: 5, image: b2, isRevealed: false, isMatched: false },
-  { matchValue: 6, image: b3, isRevealed: false, isMatched: false },
-  { matchValue: 6, image: b3, isRevealed: false, isMatched: false },
-  { matchValue: 7, image: c1, isRevealed: false, isMatched: false },
-  { matchValue: 7, image: c1, isRevealed: false, isMatched: false },
-  { matchValue: 8, image: c2, isRevealed: false, isMatched: false },
-  { matchValue: 8, image: c2, isRevealed: false, isMatched: false },
-  { matchValue: 9, image: c3, isRevealed: false, isMatched: false },
-  { matchValue: 9, image: c3, isRevealed: false, isMatched: false },
-  { matchValue: 10, image: d1, isRevealed: false, isMatched: false },
-  { matchValue: 10, image: d1, isRevealed: false, isMatched: false },
-  { matchValue: 11, image: d2, isRevealed: false, isMatched: false },
-  { matchValue: 11, image: d2, isRevealed: false, isMatched: false },
-  { matchValue: 12, image: d3, isRevealed: false, isMatched: false },
-  { matchValue: 12, image: d3, isRevealed: false, isMatched: false },
-  { matchValue: 13, image: e1, isRevealed: false, isMatched: false },
-  { matchValue: 13, image: e1, isRevealed: false, isMatched: false },
-  { matchValue: 14, image: e2, isRevealed: false, isMatched: false },
-  { matchValue: 14, image: e2, isRevealed: false, isMatched: false },
-  { matchValue: 15, image: e3, isRevealed: false, isMatched: false },
-  { matchValue: 15, image: e3, isRevealed: false, isMatched: false },
-  { matchValue: 16, image: f1, isRevealed: false, isMatched: false },
-  { matchValue: 16, image: f1, isRevealed: false, isMatched: false },
-  { matchValue: 17, image: f2, isRevealed: false, isMatched: false },
-  { matchValue: 17, image: f2, isRevealed: false, isMatched: false },
-  { matchValue: 18, image: f3, isRevealed: false, isMatched: false },
-  { matchValue: 18, image: f3, isRevealed: false, isMatched: false },
-  { matchValue: 19, image: g1, isRevealed: false, isMatched: false },
-  { matchValue: 19, image: g1, isRevealed: false, isMatched: false },
-  { matchValue: 20, image: g2, isRevealed: false, isMatched: false },
-  { matchValue: 20, image: g2, isRevealed: false, isMatched: false },
-  { matchValue: 21, image: g3, isRevealed: false, isMatched: false },
-  { matchValue: 21, image: g3, isRevealed: false, isMatched: false },
-  { matchValue: 22, image: h1, isRevealed: false, isMatched: false },
-  { matchValue: 22, image: h1, isRevealed: false, isMatched: false },
-  { matchValue: 23, image: h2, isRevealed: false, isMatched: false },
-  { matchValue: 23, image: h2, isRevealed: false, isMatched: false },
-  { matchValue: 24, image: h3, isRevealed: false, isMatched: false },
-  { matchValue: 24, image: h3, isRevealed: false, isMatched: false },
-  { matchValue: 25, image: i1, isRevealed: false, isMatched: false },
-  { matchValue: 25, image: i1, isRevealed: false, isMatched: false },
-  { matchValue: 26, image: i2, isRevealed: false, isMatched: false },
-  { matchValue: 26, image: i2, isRevealed: false, isMatched: false },
-  { matchValue: 27, image: i3, isRevealed: false, isMatched: false },
-  { matchValue: 27, image: i3, isRevealed: false, isMatched: false }
+  { matchValue: 1, image: image1, isRevealed: false, isMatched: false },
+  { matchValue: 1, image: image1, isRevealed: false, isMatched: false },
+  { matchValue: 2, image: image2, isRevealed: false, isMatched: false },
+  { matchValue: 2, image: image2, isRevealed: false, isMatched: false },
+  { matchValue: 3, image: image3, isRevealed: false, isMatched: false },
+  { matchValue: 3, image: image3, isRevealed: false, isMatched: false },
+  { matchValue: 4, image: image4, isRevealed: false, isMatched: false },
+  { matchValue: 4, image: image4, isRevealed: false, isMatched: false },
+  { matchValue: 5, image: image5, isRevealed: false, isMatched: false },
+  { matchValue: 5, image: image5, isRevealed: false, isMatched: false },
+  { matchValue: 6, image: image6, isRevealed: false, isMatched: false },
+  { matchValue: 6, image: image6, isRevealed: false, isMatched: false },
+  { matchValue: 7, image: image7, isRevealed: false, isMatched: false },
+  { matchValue: 7, image: image7, isRevealed: false, isMatched: false },
+  { matchValue: 8, image: image8, isRevealed: false, isMatched: false },
+  { matchValue: 8, image: image8, isRevealed: false, isMatched: false },
+  { matchValue: 9, image: image9, isRevealed: false, isMatched: false },
+  { matchValue: 9, image: image9, isRevealed: false, isMatched: false },
+  { matchValue: 10, image: image10, isRevealed: false, isMatched: false },
+  { matchValue: 10, image: image10, isRevealed: false, isMatched: false },
+  { matchValue: 11, image: image11, isRevealed: false, isMatched: false },
+  { matchValue: 11, image: image11, isRevealed: false, isMatched: false },
+  { matchValue: 12, image: image12, isRevealed: false, isMatched: false },
+  { matchValue: 12, image: image12, isRevealed: false, isMatched: false },
+  { matchValue: 13, image: image13, isRevealed: false, isMatched: false },
+  { matchValue: 13, image: image13, isRevealed: false, isMatched: false },
+  { matchValue: 14, image: image14, isRevealed: false, isMatched: false },
+  { matchValue: 14, image: image14, isRevealed: false, isMatched: false },
+  { matchValue: 15, image: image15, isRevealed: false, isMatched: false },
+  { matchValue: 15, image: image15, isRevealed: false, isMatched: false },
+  { matchValue: 16, image: image16, isRevealed: false, isMatched: false },
+  { matchValue: 16, image: image16, isRevealed: false, isMatched: false },
+  { matchValue: 17, image: image17, isRevealed: false, isMatched: false },
+  { matchValue: 17, image: image17, isRevealed: false, isMatched: false },
+  { matchValue: 18, image: image18, isRevealed: false, isMatched: false },
+  { matchValue: 18, image: image18, isRevealed: false, isMatched: false },
+  { matchValue: 19, image: image19, isRevealed: false, isMatched: false },
+  { matchValue: 19, image: image19, isRevealed: false, isMatched: false },
+  { matchValue: 20, image: image20, isRevealed: false, isMatched: false },
+  { matchValue: 20, image: image20, isRevealed: false, isMatched: false },
+  { matchValue: 21, image: image21, isRevealed: false, isMatched: false },
+  { matchValue: 21, image: image21, isRevealed: false, isMatched: false },
+  { matchValue: 22, image: image22, isRevealed: false, isMatched: false },
+  { matchValue: 22, image: image22, isRevealed: false, isMatched: false },
+  { matchValue: 23, image: image23, isRevealed: false, isMatched: false },
+  { matchValue: 23, image: image23, isRevealed: false, isMatched: false },
+  { matchValue: 24, image: image24, isRevealed: false, isMatched: false },
+  { matchValue: 24, image: image24, isRevealed: false, isMatched: false },
+  { matchValue: 25, image: image25, isRevealed: false, isMatched: false },
+  { matchValue: 25, image: image25, isRevealed: false, isMatched: false },
+  { matchValue: 26, image: image26, isRevealed: false, isMatched: false },
+  { matchValue: 26, image: image26, isRevealed: false, isMatched: false },
+  { matchValue: 27, image: image27, isRevealed: false, isMatched: false },
+  { matchValue: 27, image: image27, isRevealed: false, isMatched: false },
+  { matchValue: 28, image: image28, isRevealed: false, isMatched: false },
+  { matchValue: 28, image: image28, isRevealed: false, isMatched: false }
 ]
